@@ -80,6 +80,7 @@ target/
 
 #keys
 nrel_key.py
+faith_bq_key.json
 
 # IPython
 profile_default/
