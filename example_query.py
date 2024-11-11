@@ -3,6 +3,7 @@ import datetime
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from nrel_key import nrel_key
+import pandas as pd
 
 # Path to your service account JSON key
 key_path = 'faith_bq_key.json'
@@ -55,3 +56,19 @@ for date in date_range:
             solar_data.append(data_entry)
     else:
         print(f"Failed to retrieve data for {formatted_date}: {response.status_code}")
+
+# Define your BigQuery dataset and table
+dataset_id = 'faith-personal.solar_data'  # Replace with your project and dataset name
+table_id = f'{dataset_id}.daily_solar_data'  # Replace with your table name
+
+# Convert solar data to a pandas DataFrame
+df = pd.DataFrame(solar_data)
+
+# Upload the data to BigQuery
+try:
+    # Use BigQuery client to upload DataFrame
+    job = client.load_table_from_dataframe(df, table_id)
+    job.result()  # Wait for the job to complete
+    print(f"Data successfully loaded into {table_id}")
+except Exception as e:
+    print(f"Failed to upload data: {e}")
