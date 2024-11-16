@@ -17,11 +17,11 @@ nrel_url = "https://developer.nrel.gov/api/solar/solar_resource/v1.json"
 lat, lon = 39.7392, -104.9903  # Coordinates for Denver
 api_key = nrel_key  # Replace with your NREL API key
 
-# Generate a list of dates for the past year
+# Generate a list of dates for the past week
 end_date = datetime.datetime.today()
-start_date = end_date - datetime.timedelta(days=365)
+start_date = end_date - datetime.timedelta(days=7)
 
-date_range = [start_date + datetime.timedelta(days=x) for x in range(365)]
+date_range = [start_date + datetime.timedelta(days=x) for x in range(7)]
 
 # Prepare to collect data
 solar_data = []
