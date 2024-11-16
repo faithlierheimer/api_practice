@@ -9,6 +9,20 @@ import time
 # stuff for api call
 api_key = weather_key
 region = 'Colorado'
+# Cities in colorado 
+cities = [
+    'Denver', 'Colorado Springs', 'Aurora', 'Fort Collins', 'Lakewood', 
+    'Thornton', 'Arvada', 'Westminster', 'Pueblo', 'Centennial', 
+    'Boulder', 'Greeley', 'Longmont', 'Grand Junction', 'Castle Rock',
+    'Commerce City', 'Parker', 'Littleton', 'Broomfield', 'Northglenn', 
+    'Englewood', 'Greenwood Village', 'Lafayette', 'Lamar', 'Louisville', 
+    'Loveland', 'Golden', 'Salida', 'Cañon City', 'Montrose', 
+    'Steamboat Springs', 'Vail', 'Durango', 'Breckenridge', 'Aspen', 
+    'Telluride', 'Frisco', 'Eagle', 'Alamosa', 'Wheat Ridge', 
+    'La Junta', 'Elizabeth', 'Brush', 'Fort Morgan', 'Woodland Park',
+    'Pagosa Springs', 'Delta', 'Westcliffe', 'Silt', 'Glenwood Springs'
+]
+
 url = f'http://api.weatherapi.com/v1/current.json?key={api_key}&q={region}'
 
 # BQ service account json key
