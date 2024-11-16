@@ -2,7 +2,7 @@ import requests
 import datetime
 from google.cloud import bigquery
 from google.oauth2 import service_account
-from nrel_key import nrel_key
+from nrel.nrel_key import nrel_key
 import pandas as pd
 import time
 
