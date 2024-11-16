@@ -4,24 +4,26 @@ from google.cloud import bigquery
 from google.oauth2 import service_account
 from nrel_key import nrel_key
 import pandas as pd
+import time
 
 # Path to your service account JSON key
 key_path = 'faith_bq_key.json'
 
-# Initialize BigQuery client
+# Initialize BQ client
 credentials = service_account.Credentials.from_service_account_file(key_path)
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
-# Define the NREL API URL and parameters
+# Define NREL API URL and parames
 nrel_url = "https://developer.nrel.gov/api/solar/solar_resource/v1.json"
 lat, lon = 39.7392, -104.9903  # Coordinates for Denver
-api_key = nrel_key  # Replace with your NREL API key
+api_key = nrel_key  
 
 # Generate a list of dates for the past week
 end_date = datetime.datetime.today()
-start_date = end_date - datetime.timedelta(days=7)
+start_date = end_date - datetime.timedelta(days=100)
+print(f"Starting on {start_date}, ending on {end_date}")
 
-date_range = [start_date + datetime.timedelta(days=x) for x in range(7)]
+date_range = [start_date + datetime.timedelta(days=x) for x in range(100)]
 
 # Prepare to collect data
 solar_data = []
@@ -54,14 +56,15 @@ for date in date_range:
             }
             # Append the data for BigQuery
             solar_data.append(data_entry)
+            print(f"Successfully appended data.")
     else:
         print(f"Failed to retrieve data for {formatted_date}: {response.status_code}")
+    time.sleep(5)
+# Define bq dataset and table
+dataset_id = 'faith-personal.solar_data'  
+table_id = f'{dataset_id}.daily_solar_data'  
 
-# Define your BigQuery dataset and table
-dataset_id = 'faith-personal.solar_data'  # Replace with your project and dataset name
-table_id = f'{dataset_id}.daily_solar_data'  # Replace with your table name
-
-# Convert solar data to a pandas DataFrame
+# Convert solar data to pandas df
 df = pd.DataFrame(solar_data)
 
 # Upload the data to BigQuery
