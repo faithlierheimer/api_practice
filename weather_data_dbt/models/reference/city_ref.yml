@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: city_ref
+    description: "This model grabs all the city names and lat/longs and stores them for later use. Exclude this model in prod runs."
+    columns:
+      - name: city_key
+        data_type: string
+        description: ""
+
+      - name: city_name
+        data_type: string
+        description: ""
+
+      - name: city_lat
+        data_type: float64
+        description: ""
+
+      - name: city_long
+        data_type: float64
+        description: ""
