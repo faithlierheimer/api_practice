@@ -82,6 +82,7 @@ target/
 nrel_key.py
 faith_bq_key.json
 open_weather_key.py
+weather_data_dbt/faith_bq_key.json
 
 # IPython
 profile_default/
