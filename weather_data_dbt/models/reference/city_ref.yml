@@ -12,10 +12,6 @@ models:
         data_type: string
         description: ""
 
-      - name: city_lat
-        data_type: float64
-        description: ""
-
-      - name: city_long
+      - name: city_lat_long
         data_type: float64
         description: ""
