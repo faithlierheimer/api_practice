@@ -1,3 +1,4 @@
+-- i don't know if i really need this staging model, i'm just gonna have one in case i need it later. 
 select
     *
 from
