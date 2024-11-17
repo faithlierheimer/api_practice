@@ -76,14 +76,14 @@ for city in cities:
 # Print the collected weather data for all cities
 print(weather_data)
 
-# Define the BigQuery dataset and table
+# Define BigQuery dataset and table
 dataset_id = 'faith-personal.weather_data'  # Replace with your dataset
 table_id = f'{dataset_id}.weather_data'  # Replace with your table name
 
 # Convert the weather data to a pandas DataFrame
 df = pd.DataFrame(weather_data)
 
-# Define BigQuery schema 
+# Define BigQuery schema
 schema = [
     bigquery.SchemaField('date', 'STRING'),
     bigquery.SchemaField('last_updated', 'STRING'),
@@ -95,11 +95,16 @@ schema = [
     bigquery.SchemaField('uv', 'FLOAT')
 ]
 
+# Define the job configuration with WRITE_APPEND to append data
+job_config = bigquery.LoadJobConfig(
+    schema=schema,
+    write_disposition='WRITE_APPEND'  # This ensures new data is added to the existing table
+)
+
 # Upload the data to BigQuery
 try:
-    job = client.load_table_from_dataframe(df, table_id, job_config=bigquery.LoadJobConfig(schema=schema))
+    job = client.load_table_from_dataframe(df, table_id, job_config=job_config)
     job.result()  # Wait for the job to complete
-    print(f"Data successfully loaded into {table_id}")
+    print(f"Data successfully appended to {table_id}")
 except Exception as e:
     print(f"Failed to upload data: {e}")
-
