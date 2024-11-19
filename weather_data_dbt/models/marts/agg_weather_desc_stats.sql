@@ -1,0 +1,23 @@
+with weather as (
+select 
+    * 
+from
+    {{ ref('int_weather_fact') }})
+
+select 
+    city_key,
+    FORMAT_TIMESTAMP('%Y-%m-%d', weather_date) AS formatted_date,
+    min(temperature) as min_temp,
+    max(temperature) as max_temp,
+    avg(temperature) as avg_temp,
+    min(uv) as min_uv,
+    max(uv) as max_uv,
+    avg(uv) as avg_uv,
+    min(humidity) as min_humidity,
+    max(humidity) as max_humidity,
+    avg(humidity) as avg_humidity
+from 
+    weather
+group by
+    city_key,
+    FORMAT_TIMESTAMP('%Y-%m-%d', weather_date)
