@@ -4,3 +4,6 @@ sources:
   - name: weather_data
     tables:
       - name: weather_data
+  - name: prod_weather_data
+    tables:
+      - name: city_ref

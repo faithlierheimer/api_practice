@@ -1,0 +1,8 @@
+[sqlfluff]
+dialect = bigquery
+templater = dbt
+max_line_length = 120  
+exclude_rules = L009  
+
+[sqlfluff:templater:dbt]
+profiles_dir = ~/.dbt
