@@ -5,6 +5,7 @@ from google.oauth2 import service_account
 from weather_key import weather_key
 import pandas as pd
 import time
+import os
 
 # stuff for api call
 api_key = weather_key
@@ -25,7 +26,7 @@ cities = [
 ]
 
 # BQ service account json key
-key_path = 'faith_bq_key.json'
+key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
 
 # Initialize BQ client
