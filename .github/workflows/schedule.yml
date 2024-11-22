@@ -18,5 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+      - name: Set up BigQuery Credentials
+        run: echo "${{ secrets.faith_bq_key }}" > $HOME/faith_bq_key.json
       - name: Run Python script
         run: python weather_query.py
