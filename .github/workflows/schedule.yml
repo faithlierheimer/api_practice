@@ -27,6 +27,9 @@ jobs:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > $GITHUB_WORKSPACE/faith_bq_key.json
 
+      - name: Check if BigQuery key file exists
+        run: ls -l $GITHUB_WORKSPACE/faith_bq_key.json
+
       - name: Set Weather API key
         env:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
