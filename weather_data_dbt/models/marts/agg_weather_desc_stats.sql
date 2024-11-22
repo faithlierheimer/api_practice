@@ -5,7 +5,8 @@ from
     {{ ref('int_weather_fact') }})
 
 select 
-    city_key,
+    cities.city_name,
+    cities.city_lat_long,
     FORMAT_TIMESTAMP('%Y-%m-%d', weather_date) AS formatted_date,
     min(temperature) as min_temp,
     max(temperature) as max_temp,
@@ -18,6 +19,12 @@ select
     avg(humidity) as avg_humidity
 from 
     weather
+join {{ ref('stg_cities')}} as cities
+on weather.city_key = cities.city_key
 group by
-    city_key,
+    city_name,
+    city_lat_long,
     FORMAT_TIMESTAMP('%Y-%m-%d', weather_date)
+order by
+    city_name,
+    formatted_date
