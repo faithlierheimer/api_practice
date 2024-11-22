@@ -3,7 +3,7 @@ name: Run Weather Query
 on:
   schedule:
     - cron: "0 9 * * *"  # Run at 9:00 AM UTC every day
-    - cron: "0 17 * * *" # Run at 5:00 PM UTC every day
+    - cron: "0 17 * * *"  # Run at 5:00 PM UTC every day
 
 jobs:
   run-script:
@@ -27,7 +27,13 @@ jobs:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > faith_bq_key.json
 
+      - name: Set Weather API key
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        run: echo "$WEATHER_API_KEY" > weather_api_key.txt
+
       - name: Run Python script
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: python weather_query.py
