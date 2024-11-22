@@ -11,14 +11,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Set up BigQuery Credentials
-        run: echo "${{ secrets.faith_bq_key }}" > $HOME/faith_bq_key.json
+
+      - name: Create BigQuery key file
+        env:
+          FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
+        run: echo "$FAITH_BQ_KEY" > faith_bq_key.json
+
       - name: Run Python script
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
         run: python weather_query.py
