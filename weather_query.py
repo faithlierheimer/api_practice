@@ -2,16 +2,15 @@ import requests
 import datetime
 from google.cloud import bigquery
 from google.oauth2 import service_account
-from weather_key import weather_key
 import pandas as pd
 import time
 import os
 
-# stuff for api call
-api_key = weather_key
+# Fetch the weather API key from the environment variable
+api_key = os.getenv('WEATHER_API_KEY')
 region = 'Colorado'
 
-# Cities in colorado 
+# Cities in Colorado 
 cities = [
     'Denver', 'Colorado Springs', 'Aurora', 'Fort Collins', 'Lakewood', 
     'Thornton', 'Arvada', 'Westminster', 'Pueblo', 'Centennial', 
@@ -28,15 +27,12 @@ cities = [
 # BQ service account json key
 key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
-
 # Initialize BQ client
 credentials = service_account.Credentials.from_service_account_file(key_path)
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
-
 # Initialize empty df to collect weather data
 weather_data = []
-
 
 # Loop through each city in the list
 for city in cities:
