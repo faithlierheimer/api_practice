@@ -43,6 +43,6 @@ jobs:
 
       - name: Run Python script
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: $GITHUB_WORKSPACE/faith_bq_key.json
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: python weather_query.py
