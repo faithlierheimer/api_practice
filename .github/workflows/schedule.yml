@@ -1,9 +1,7 @@
 name: Run Weather Query
 
 on:
-  schedule:
-    - cron: "0 9 * * *"  # Run at 9:00 AM UTC every day
-    - cron: "0 17 * * *"  # Run at 5:00 PM UTC every day
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   run-script:
@@ -26,6 +24,13 @@ jobs:
         env:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > $GITHUB_WORKSPACE/faith_bq_key.json
+
+      - name: Debug BigQuery key file creation
+        env:
+          FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
+        run: |
+          echo "Contents of faith_bq_key.json:"
+          cat $GITHUB_WORKSPACE/faith_bq_key.json || echo "File not found or empty!"
 
       - name: Check if BigQuery key file exists
         run: ls -l $GITHUB_WORKSPACE/faith_bq_key.json
