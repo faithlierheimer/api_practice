@@ -25,16 +25,15 @@ jobs:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > $GITHUB_WORKSPACE/faith_bq_key.json
 
-      - name: Verify BigQuery key file
+      - name: Verify GOOGLE_APPLICATION_CREDENTIALS
         run: |
-          echo "Checking if $GITHUB_WORKSPACE/faith_bq_key.json exists:"
-          ls -l $GITHUB_WORKSPACE/faith_bq_key.json || echo "File not found!"
-          echo "File size:"
-          stat --printf="Size: %s bytes\n" $GITHUB_WORKSPACE/faith_bq_key.json || echo "File size check failed!"
+          echo "GOOGLE_APPLICATION_CREDENTIALS is set to:"
+          echo $GOOGLE_APPLICATION_CREDENTIALS
+          echo "Checking if the file at GOOGLE_APPLICATION_CREDENTIALS exists:"
+          ls -l $GOOGLE_APPLICATION_CREDENTIALS || echo "File not found at path!"
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: $GITHUB_WORKSPACE/faith_bq_key.json
 
-
-      - name: Check if BigQuery key file exists
-        run: ls -l $GITHUB_WORKSPACE/faith_bq_key.json
 
       - name: Set Weather API key
         env:
