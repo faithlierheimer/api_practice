@@ -27,6 +27,9 @@ cities = [
 # BQ service account json key
 key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
+if key_path is None:
+    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS is not set")
+
 # Initialize BQ client
 credentials = service_account.Credentials.from_service_account_file(key_path)
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
