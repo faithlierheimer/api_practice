@@ -32,7 +32,8 @@ jobs:
           echo "Checking if the file at GOOGLE_APPLICATION_CREDENTIALS exists:"
           ls -l $GOOGLE_APPLICATION_CREDENTIALS || echo "File not found at path!"
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: $GITHUB_WORKSPACE/faith_bq_key.json
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
+
 
 
       - name: Set Weather API key
