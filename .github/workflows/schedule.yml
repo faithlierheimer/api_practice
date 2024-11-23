@@ -25,12 +25,13 @@ jobs:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > $GITHUB_WORKSPACE/faith_bq_key.json
 
-      - name: Debug BigQuery key file creation
-        env:
-          FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
+      - name: Verify BigQuery key file
         run: |
-          echo "Contents of faith_bq_key.json:"
-          cat $GITHUB_WORKSPACE/faith_bq_key.json || echo "File not found or empty!"
+          echo "Checking if $GITHUB_WORKSPACE/faith_bq_key.json exists:"
+          ls -l $GITHUB_WORKSPACE/faith_bq_key.json || echo "File not found!"
+          echo "File size:"
+          stat --printf="Size: %s bytes\n" $GITHUB_WORKSPACE/faith_bq_key.json || echo "File size check failed!"
+
 
       - name: Check if BigQuery key file exists
         run: ls -l $GITHUB_WORKSPACE/faith_bq_key.json
