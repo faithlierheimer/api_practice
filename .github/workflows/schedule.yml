@@ -1,7 +1,10 @@
 name: Run Weather Query
 
 on:
-  workflow_dispatch:  # Allows manual triggering of the workflow
+  workflow_dispatch:  
+  schedule:          
+    - cron: "0 14 * * *" 
+    - cron: "0 2 * * *"   
 
 jobs:
   run-script:
