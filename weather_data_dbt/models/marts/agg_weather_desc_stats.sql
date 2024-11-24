@@ -7,6 +7,8 @@ from
 select 
     cities.city_name,
     cities.city_lat_long,
+    cities.city_lat,
+    cities.city_long,
     FORMAT_TIMESTAMP('%Y-%m-%d', weather_date) AS formatted_date,
     min(temperature) as min_temp,
     max(temperature) as max_temp,
@@ -24,6 +26,8 @@ on weather.city_key = cities.city_key
 group by
     city_name,
     city_lat_long,
+    city_lat,
+    city_long,
     FORMAT_TIMESTAMP('%Y-%m-%d', weather_date)
 order by
     city_name,
