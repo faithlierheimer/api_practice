@@ -5,7 +5,9 @@ select
     temperature,
     humidity,
     uv,
-    concat(city_lat, ',', city_long) as city_lat_long
+    concat(city_lat, ',', city_long) as city_lat_long,
+    city_lat,
+    city_long
 from
     {{ source('weather_data', 'weather_data') }}
 
