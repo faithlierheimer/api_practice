@@ -90,6 +90,7 @@ renamed as (
         `2024-10-31` as m_2024_10
     from source
 ),
+
 unpivoted as (
     {{ generate_unpivot(2018, 3, 2024, 10) }}
 )
@@ -98,3 +99,4 @@ select
     {{ dbt_utils.generate_surrogate_key(['region_name', 'month', 'value']) }} as zillow_pk
 from    
     unpivoted
+order by state_name asc
