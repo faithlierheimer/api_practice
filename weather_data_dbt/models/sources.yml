@@ -7,3 +7,8 @@ sources:
   - name: prod_weather_data
     tables:
       - name: city_ref
+  - name: housing
+    tables:
+      - name: zillow-for-sale-inventory
+
+

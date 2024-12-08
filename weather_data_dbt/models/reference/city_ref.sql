@@ -5,6 +5,8 @@
 with distinct_cities as (
 select
     city_name,
+    city_lat,
+    city_long,
     concat(city_lat, ',', city_long) as city_lat_long 
 from 
     {{ source('weather_data', 'weather_data') }}

@@ -23,7 +23,7 @@ cities = [
     'La Junta', 'Elizabeth', 'Brush', 'Fort Morgan', 'Woodland Park',
     'Pagosa Springs', 'Delta', 'Westcliffe', 'Silt', 'Glenwood Springs'
 ]
-
+# can i fuck w this somehow so it grabs the key locally on my machine but if it's running in GH actions it does the env thing?
 # BQ service account json key
 key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
