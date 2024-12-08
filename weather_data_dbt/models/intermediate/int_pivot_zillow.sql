@@ -93,10 +93,22 @@ renamed as (
 
 unpivoted as (
     {{ generate_unpivot(2018, 3, 2024, 10) }}
-)
+),
+
+unpivoted_with_key as (
 select 
     *,
+    REGEXP_EXTRACT(region_name, r'^[^,]+') AS city_normalized,
     {{ dbt_utils.generate_surrogate_key(['region_name', 'month', 'value']) }} as zillow_pk
 from    
     unpivoted
-order by state_name asc
+order by state_name asc)
+
+select * from unpivoted_with_key
+
+
+
+    
+
+
+    
