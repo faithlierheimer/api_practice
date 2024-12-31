@@ -10,5 +10,11 @@ sources:
   - name: housing
     tables:
       - name: zillow-for-sale-inventory
+  - name: spotify
+    tables:
+      - name: streaming_history_2012_2019
+      - name: streaming_history_2019_2020
+      - name: streaming_history_2020_2022
+      - name: streaming_history_2022_2024
 
 

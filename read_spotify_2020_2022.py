@@ -4,8 +4,8 @@ from google.cloud import bigquery
 
 
 
-# data 2019-2020
-early_data = pd.read_json('../spotify/Streaming_History_Audio_2019-2020_1.json')
+# early data means 2020-2022
+early_data = pd.read_json('../spotify/Streaming_History_Audio_2020-2022_2.json')
 
 bq_creds_path = 'faith_bq_key.json'
 
@@ -14,7 +14,7 @@ client = bigquery.Client.from_service_account_json(bq_creds_path)
 
 ## Define dataset & table name
 dataset_id = 'spotify'  # Name of your dataset
-table_id = 'streaming_history_2019_2020'  # Desired table name
+table_id = 'streaming_history_2020_2022'  # Desired table name
 full_table_id = f'{client.project}.{dataset_id}.{table_id}'
 
 # Upload DataFrame to BigQuery
