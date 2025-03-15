@@ -27,25 +27,15 @@ jobs:
         env:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > $GITHUB_WORKSPACE/faith_bq_key.json
-
-      - name: Verify GOOGLE_APPLICATION_CREDENTIALS
+      - name: Test BigQuery Authentication
         run: |
-          echo "Expected path: $GITHUB_WORKSPACE/faith_bq_key.json"
-          echo "GOOGLE_APPLICATION_CREDENTIALS is set to:"
-          echo $GOOGLE_APPLICATION_CREDENTIALS
-          echo "Checking if the file exists in workspace:"
-          ls -l $GITHUB_WORKSPACE
-          echo "Checking if the file exists at GOOGLE_APPLICATION_CREDENTIALS path:"
-          ls -l $GOOGLE_APPLICATION_CREDENTIALS || echo "File not found!"
+          echo "Testing authentication with gcloud..."
+          gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+          gcloud auth list
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
 
-      - name: Validate JSON format
-        run: |
-          echo "Validating JSON format..."
-          cat $GOOGLE_APPLICATION_CREDENTIALS | jq . || echo "Invalid JSON!"
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
+
 
 
 
