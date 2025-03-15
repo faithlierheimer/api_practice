@@ -27,14 +27,16 @@ jobs:
         env:
           FAITH_BQ_KEY: ${{ secrets.FAITH_BQ_KEY }}
         run: echo "$FAITH_BQ_KEY" > $GITHUB_WORKSPACE/faith_bq_key.json
-      - name: Test BigQuery Authentication
-        run: |
-          echo "Testing authentication with gcloud..."
-          gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-          gcloud auth list
+      - name: Set Weather API key
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        run: echo "$WEATHER_API_KEY" > weather_api_key.txt
+
+      - name: Run Python script
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
-
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        run: python weather_query.py
 
 
 
