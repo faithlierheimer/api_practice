@@ -39,13 +39,13 @@ jobs:
 
 
 
-      - name: Set Weather API key
-        env:
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
-        run: echo "$WEATHER_API_KEY" > weather_api_key.txt
+      # - name: Set Weather API key
+      #   env:
+      #     WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+      #   run: echo "$WEATHER_API_KEY" > weather_api_key.txt
 
-      - name: Run Python script
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
-          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
-        run: python weather_query.py
+      # - name: Run Python script
+      #   env:
+      #     GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/faith_bq_key.json
+      #     WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+      #   run: python weather_query.py
