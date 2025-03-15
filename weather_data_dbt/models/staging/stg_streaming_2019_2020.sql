@@ -7,45 +7,45 @@ with source as (
 renamed as (
 
     select
-           TIMESTAMP(`ts`) as timestamp_played
+        `conn_country` as country_listened_in
         ,
-            REGEXP_EXTRACT(`platform`, r'\(([^)]+)\)') AS listened_on
+        `ip_addr` as ip_address
         ,
-            (`ms_played`/1000) as seconds_played
+        `master_metadata_track_name` as track_name
         ,
-            (`ms_played`/60000) as minutes_played
+        `master_metadata_album_artist_name` as artist_name
         ,
-            `conn_country` as country_listened_in
+        `master_metadata_album_album_name` as album_name
         ,
-            `ip_addr` as ip_address
+        `episode_name` as podcast_episode_name
         ,
-            `master_metadata_track_name` as track_name
+        `episode_show_name` as podcast_show_name
         ,
-            `master_metadata_album_artist_name` as artist_name
+        `reason_start`
         ,
-            `master_metadata_album_album_name` as album_name
+        `reason_end`
         ,
-            `episode_name` as podcast_episode_name
+        `shuffle`
         ,
-            `episode_show_name` as podcast_show_name
+        `skipped`
         ,
-            `reason_start`
+        `offline`
         ,
-            `reason_end`
+        `offline_timestamp`
         ,
-            `shuffle`
+        TIMESTAMP(`ts`) as timestamp_played
         ,
-            `skipped`
+        REGEXP_EXTRACT(`platform`, r'\(([^)]+)\)') as listened_on
         ,
-            `offline`
+        (`ms_played` / 1000) as seconds_played
         ,
-            `offline_timestamp`
+        (`ms_played` / 60000) as minutes_played
     from source
 
 ),
+
 breakout_timestamps as (
     select
-        DATETIME(timestamp_played, 'America/Denver') AS timestamp_played,
         listened_on,
         seconds_played,
         minutes_played,
@@ -61,22 +61,15 @@ breakout_timestamps as (
         shuffle,
         skipped,
         offline,
-        offline_timestamp
+        offline_timestamp,
+        DATETIME(timestamp_played, 'America/Denver') as timestamp_played
 
     from
         renamed
 ),
+
 timestamps_converted as (
     select
-        date(timestamp_played) as date_played,
-        FORMAT_TIMESTAMP('%Y-%m', timestamp_played) AS year_month_played,
-        FORMAT_TIMESTAMP('%H:%M:%S', timestamp_played) AS time_played,
-        CASE
-            WHEN EXTRACT(HOUR FROM timestamp_played) >= 6 AND EXTRACT(HOUR FROM timestamp_played) < 12 THEN 'Morning'
-            WHEN EXTRACT(HOUR FROM timestamp_played) >= 12 AND EXTRACT(HOUR FROM timestamp_played) < 18 THEN 'Afternoon'
-            WHEN EXTRACT(HOUR FROM timestamp_played) >= 18 AND EXTRACT(HOUR FROM timestamp_played) < 21 THEN 'Evening'
-        ELSE 'Night'
-        END AS time_of_day,
         listened_on,
         seconds_played,
         minutes_played,
@@ -92,7 +85,17 @@ timestamps_converted as (
         shuffle,
         skipped,
         offline,
-        offline_timestamp
+        offline_timestamp,
+        DATE(timestamp_played) as date_played,
+        FORMAT_TIMESTAMP('%Y', timestamp_played) as year_played,
+        FORMAT_TIMESTAMP('%Y-%m', timestamp_played) as year_month_played,
+        FORMAT_TIMESTAMP('%H:%M:%S', timestamp_played) as time_played,
+        case
+            when EXTRACT(hour from timestamp_played) >= 6 and EXTRACT(hour from timestamp_played) < 12 then 'Morning'
+            when EXTRACT(hour from timestamp_played) >= 12 and EXTRACT(hour from timestamp_played) < 18 then 'Afternoon'
+            when EXTRACT(hour from timestamp_played) >= 18 and EXTRACT(hour from timestamp_played) < 21 then 'Evening'
+            else 'Night'
+        end as time_of_day
     from
         breakout_timestamps
 )
