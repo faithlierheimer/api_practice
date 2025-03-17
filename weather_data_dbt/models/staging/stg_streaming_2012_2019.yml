@@ -5,6 +5,13 @@ models:
       - name: listened_on
         data_type: string
         description: ""
+        meta:
+          dimension:
+            type: date
+          metrics:
+            first_listened_on:
+              type: date
+              sql: MAX(${TABLE}.listened_on)
 
       - name: seconds_played
         data_type: float64
