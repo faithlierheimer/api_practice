@@ -1,0 +1,108 @@
+models:
+  - name: stg_streaming_2022_2024
+    columns:
+      - name: listened_on
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: seconds_played
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: minutes_played
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: country_listened_in
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: ip_address
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: track_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: artist_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: album_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: podcast_episode_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: podcast_show_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: reason_start
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: reason_end
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: shuffle
+        description: ""
+        meta:
+          dimension:
+            type: boolean
+      - name: skipped
+        description: ""
+        meta:
+          dimension:
+            type: boolean
+      - name: offline
+        description: ""
+        meta:
+          dimension:
+            type: boolean
+      - name: offline_timestamp
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: date_played
+        description: ""
+        meta:
+          dimension:
+            type: date
+      - name: year_played
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: year_month_played
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: time_played
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: time_of_day
+        description: ""
+        meta:
+          dimension:
+            type: string
