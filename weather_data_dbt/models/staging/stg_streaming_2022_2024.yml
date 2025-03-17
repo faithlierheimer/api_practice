@@ -5,17 +5,27 @@ models:
         description: ""
         meta:
           dimension:
-            type: string
+            type: date
+          metrics:
+            first_listened_on:
+              type: date
+              sql: MAX(${TABLE}.created_at_date)
       - name: seconds_played
         description: ""
         meta:
           dimension:
             type: number
+          metrics:
+            sum_seconds_listened:
+              type: sum
       - name: minutes_played
         description: ""
         meta:
           dimension:
             type: number
+          metrics:
+            sum_minutes_listened:
+              type: sum
       - name: country_listened_in
         description: ""
         meta:
