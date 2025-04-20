@@ -1,0 +1,68 @@
+models:
+  - name: agg_weather_desc_stats
+    columns:
+      - name: city_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: city_lat
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: city_long
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: formatted_date
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: min_temp
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: max_temp
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: avg_temp
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: min_uv
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: max_uv
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: avg_uv
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: min_humidity
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: max_humidity
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: avg_humidity
+        description: ""
+        meta:
+          dimension:
+            type: number
