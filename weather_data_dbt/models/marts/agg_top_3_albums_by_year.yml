@@ -19,8 +19,6 @@ models:
       - name: times_played
         description: ""
         meta:
-          dimension:
-            type: number
           metrics:
             times_played:
               type: sum
