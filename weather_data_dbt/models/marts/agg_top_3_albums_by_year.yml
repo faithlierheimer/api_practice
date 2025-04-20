@@ -20,7 +20,7 @@ models:
         description: ""
         meta:
           metrics:
-            times_played:
+            times_played_albums:
               type: sum
       - name: rank
         description: ""

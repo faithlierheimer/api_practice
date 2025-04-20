@@ -15,7 +15,7 @@ models:
         description: ""
         meta:
           metrics:
-            times_played:
+            times_played_artists:
               type: sum
       - name: rank
         description: ""
