@@ -5,7 +5,7 @@ models:
         description: ""
         meta:
           dimension:
-            type: string
+            type: number
       - name: artist_name
         description: ""
         meta:
@@ -16,6 +16,9 @@ models:
         meta:
           dimension:
             type: number
+          metrics:
+            times_played:
+              type: sum
       - name: rank
         description: ""
         meta:
