@@ -1,0 +1,28 @@
+models:
+  - name: int_weather_fact
+    columns:
+      - name: city_key
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: weather_date
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: temperature
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: uv
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: humidity
+        description: ""
+        meta:
+          dimension:
+            type: number

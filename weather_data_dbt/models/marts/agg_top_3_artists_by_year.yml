@@ -1,0 +1,24 @@
+models:
+  - name: agg_top_3_artists_by_year
+    columns:
+      - name: year_played
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: artist_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: times_played
+        description: ""
+        meta:
+          metrics:
+            times_played_artists:
+              type: sum
+      - name: rank
+        description: ""
+        meta:
+          dimension:
+            type: number

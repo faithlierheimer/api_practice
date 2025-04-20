@@ -1,0 +1,23 @@
+models:
+  - name: stg_cities
+    columns:
+      - name: city_key
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: city_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: city_lat
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: city_long
+        description: ""
+        meta:
+          dimension:
+            type: number

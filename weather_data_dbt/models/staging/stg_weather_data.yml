@@ -1,0 +1,48 @@
+models:
+  - name: stg_weather_data
+    columns:
+      - name: city_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: temperature
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: humidity
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: uv
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: city_lat
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: city_long
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: weather_date
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: last_updated
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: city_lat_long
+        description: ""
+        meta:
+          dimension:
+            type: string

@@ -6,7 +6,6 @@ from
 
 select 
     cities.city_name,
-    cities.city_lat_long,
     cities.city_lat,
     cities.city_long,
     FORMAT_TIMESTAMP('%Y-%m-%d', weather_date) AS formatted_date,
@@ -25,7 +24,6 @@ join {{ ref('stg_cities')}} as cities
 on weather.city_key = cities.city_key
 group by
     city_name,
-    city_lat_long,
     city_lat,
     city_long,
     FORMAT_TIMESTAMP('%Y-%m-%d', weather_date)

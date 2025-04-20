@@ -1,0 +1,23 @@
+models:
+  - name: agg_top_skipped_sons_all_time
+    columns:
+      - name: track_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: artist_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: album_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: times_skipped
+        description: ""
+        meta:
+          dimension:
+            type: number
