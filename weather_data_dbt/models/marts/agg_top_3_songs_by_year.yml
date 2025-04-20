@@ -1,0 +1,33 @@
+models:
+  - name: agg_top_3_songs_by_year
+    columns:
+      - name: year_played
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: track_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: artist_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: album_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: times_played
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: rank
+        description: ""
+        meta:
+          dimension:
+            type: number

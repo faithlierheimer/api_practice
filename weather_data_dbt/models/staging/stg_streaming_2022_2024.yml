@@ -5,7 +5,7 @@ models:
         description: ""
         meta:
           dimension:
-            type: date
+            type: string
           metrics:
             first_listened_on:
               type: date

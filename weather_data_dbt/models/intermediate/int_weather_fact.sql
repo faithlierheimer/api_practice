@@ -9,4 +9,5 @@ from
     {{ ref('stg_weather_data') }} as weather
 inner join
     {{ ref('stg_cities') }} as cities
-    on weather.city_lat_long = cities.city_lat_long
+    on weather.city_lat = cities.city_lat
+    and weather.city_long = cities.city_long

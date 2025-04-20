@@ -1,0 +1,18 @@
+models:
+  - name: agg_top_albums_all_time
+    columns:
+      - name: album_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: artist_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: times_played
+        description: ""
+        meta:
+          dimension:
+            type: number
