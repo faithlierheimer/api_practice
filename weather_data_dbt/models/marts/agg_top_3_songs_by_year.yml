@@ -2,33 +2,33 @@ models:
   - name: agg_top_3_songs_by_year
     columns:
       - name: year_played
-        description: ""
+        description: '{{ doc("year_played") }}'
         meta:
           dimension:
-            type: number
+            type: string
       - name: track_name
         description: ""
         meta:
           dimension:
             type: string
       - name: artist_name
-        description: ""
+        description: '{{ doc("artist_name") }}'
         meta:
           dimension:
             type: string
       - name: album_name
-        description: ""
+        description: '{{ doc("album_name") }}'
         meta:
           dimension:
             type: string
       - name: times_played
-        description: ""
+        description: '{{ doc("times_played") }}'
         meta:
           metrics:
             times_played_songs:
               type: sum
       - name: rank
-        description: ""
+        description: '{{ doc("rank") }}'
         meta:
           dimension:
             type: number
