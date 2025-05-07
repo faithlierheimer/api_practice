@@ -5,7 +5,7 @@ models:
         description: ""
         meta:
           dimension:
-            type: number
+            type: string
       - name: album_name
         description: ""
         meta:
