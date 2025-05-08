@@ -15,7 +15,7 @@ models:
         description: '{{ doc("times_played") }}'
         meta:
           metrics:
-            times_played_artists:
+            times_artist_played:
               type: sum
       - name: rank
         description: '{{ doc("rank") }}'
