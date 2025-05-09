@@ -83,6 +83,7 @@ nrel_key.py
 faith_bq_key.json
 weather_key.py
 weather_data_dbt/faith_bq_key.json
+spotify_key.py
 
 # IPython
 profile_default/
