@@ -1,3 +1,4 @@
+with track_play_counts as (
 select 
     track_name,
     artist_name,
@@ -10,4 +11,6 @@ group by
     track_name,
     artist_name
 order by
-    track_play_count desc
+    track_play_count desc)
+
+select * from track_play_counts where track_play_count > 10
