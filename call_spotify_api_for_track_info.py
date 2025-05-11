@@ -1,4 +1,5 @@
 from spotipy import Spotify
+import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
 import spotify_key 
@@ -8,17 +9,20 @@ from spotipy.exceptions import SpotifyException
 import requests
 
 
-# Set up authentication--change it up so i can access track info
-auth_manager = SpotifyOAuth(
+
+# User-authenticated client (for search)
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id=spotify_key.SPOTIFY_CLIENT_ID,
     client_secret=spotify_key.SPOTIFY_CLIENT_SECRET,
     redirect_uri="http://127.0.0.1:8888/callback",
-    scope="user-library-read user-read-private playlist-read-private"
-)
+    scope="user-library-read"
+))
 
-
-# Initialize the Spotify client
-sp = Spotify(auth_manager=auth_manager)
+# App-authenticated client (for audio features)
+# app_sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
+#     client_id=spotify_key.SPOTIFY_CLIENT_ID,
+#     client_secret=spotify_key.SPOTIFY_CLIENT_SECRET,
+# ))
 
 # Read in my tracks that i've played at least 10x 
 faith_spotify_tracks = pd.read_csv('tracks_played_at_least_10_times.csv')
@@ -27,56 +31,55 @@ faith_spotify_tracks = pd.read_csv('tracks_played_at_least_10_times.csv')
 faith_spotify_tracks_names = faith_spotify_tracks['track_name'].dropna().tolist()
 
 #grab 10 items to test call
-faith_spotify_tracks_names_first_10 = faith_spotify_tracks_names[:10]
+faith_spotify_tracks_names_first_1 = faith_spotify_tracks_names[:1]
 
 
 results = []
 track_progress = 1
 
-for track_name in faith_spotify_tracks_names_first_10:
+for track_name in faith_spotify_tracks_names_first_1:
     try:
-        # Search for the track by name
+        # 1. Search for the track name
         result = sp.search(q=track_name, type="track", limit=1)
-        print(f"Search result for {track_name}: {result}")
+        if not result["tracks"]["items"]:
+            print(f"No track found for {track_name}")
+            continue
 
-        
-        # Extract the track ID from the search results
-        track = result['tracks']['items'][0]
-        track_id = track['id']
-        print(f"Track found: {track['name']} with ID: {track_id}")
-        
-        # Now get audio features for the track
-        audio_features = sp.audio_features([track_id])[0]  # single track, so we use index 0
-        
-        # Append the results to the list
+        # 2. Extract the track ID
+        track = result["tracks"]["items"][0]
+        track_id = track["id"]
+        print(track_id)
+        # 3. Get audio features for that track ID
+        audio_features = sp.audio_features([track_id])[0]
+        print(audio_features)
+
+        if audio_features is None:
+            print(f"No audio features returned for {track_name} (ID: {track_id})")
+            continue
+
+        # 4. Save to results
         results.append({
             "input_name": track_name,
             "spotify_id": track_id,
-            "acousticness": audio_features['acousticness'],
-            "danceability": audio_features['danceability'],
-            "energy": audio_features['energy'],
-            "tempo": audio_features['tempo'],
-            "valence": audio_features['valence']
+            "acousticness": audio_features["acousticness"],
+            "danceability": audio_features["danceability"],
+            "energy": audio_features["energy"],
+            "tempo": audio_features["tempo"],
+            "valence": audio_features["valence"]
         })
 
         print(f"Appended {track_name} to dataframe. Record {track_progress}")
-        time.sleep(1)
         track_progress += 1
+        time.sleep(1)  # to respect rate limits
 
     except SpotifyException as e:
-        if e.http_status == 429:
-            retry_after = int(e.headers.get("Retry-After", 10))
-            print(f"Rate limited. Sleeping for {retry_after} seconds...")
-            time.sleep(retry_after + 1)
-        else:
-            print(f"Spotify error: {e}")
-            time.sleep(5)
-    except requests.exceptions.RequestException as e:
-        print(f"Request error: {e}")
-        time.sleep(10)
+        print(f"Spotify API error: {e}")
+        time.sleep(5)
+    except Exception as e:
+        print(f"General error: {e}")
+        time.sleep(5)
 
-# Convert results to DataFrame and save as CSV
+# Save final results
 df_results = pd.DataFrame(results)
 df_results.to_csv("spotify_track_characteristics.csv", index=False)
-
 
