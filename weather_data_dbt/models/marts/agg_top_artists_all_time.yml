@@ -2,12 +2,12 @@ models:
   - name: agg_top_artists_all_time
     columns:
       - name: artist_name
-        description: ""
+        description: "{{doc('artist_name')}}"
         meta:
           dimension:
             type: string
       - name: times_played
-        description: ""
+        description: "{{doc('times_played')}}"
         meta:
           dimension:
             type: number

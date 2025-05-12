@@ -93,10 +93,20 @@ renamed as (
 
 unpivoted as (
     {{ generate_unpivot(2018, 3, 2024, 10) }}
+),
+
+final as (
+    select 
+        region_id,
+        size_rank,
+        region_name,
+        region_type,
+        state_name,
+        month as year_month,
+        value as no_homes_for_sale,
+        {{ dbt_utils.generate_surrogate_key(['region_name', 'month', 'value']) }} as zillow_pk
+    from    
+        unpivoted
 )
-select 
-    *,
-    {{ dbt_utils.generate_surrogate_key(['region_name', 'month', 'value']) }} as zillow_pk
-from    
-    unpivoted
-order by state_name asc
+
+select * from final 

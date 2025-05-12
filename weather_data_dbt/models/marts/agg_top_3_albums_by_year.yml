@@ -1,5 +1,6 @@
 models:
   - name: agg_top_3_albums_by_year
+    description: '{{ doc("agg_top_3_albums_by_year")}}'
     columns:
       - name: year_played
         description: '{{ doc("year_played") }}'
@@ -22,6 +23,8 @@ models:
           metrics:
             times_album_played:
               type: sum
+          dimension:
+            type: number
       - name: rank
         description: '{{ doc("rank") }}'
         meta:

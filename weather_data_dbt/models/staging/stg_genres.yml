@@ -1,0 +1,28 @@
+models:
+  - name: stg_genres
+    columns:
+      - name: artist_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: spotify_id
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: genre_1
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: genre_2
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: genre_3
+        description: ""
+        meta:
+          dimension:
+            type: string

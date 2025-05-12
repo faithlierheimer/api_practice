@@ -37,17 +37,17 @@ models:
           dimension:
             type: string
       - name: track_name
-        description: ""
+        description: "{{doc('track_name')}}"
         meta:
           dimension:
             type: string
       - name: artist_name
-        description: ""
+        description: "{{doc('artist_name')}}"
         meta:
           dimension:
             type: string
       - name: album_name
-        description: ""
+        description: "{{doc('album_name')}}"
         meta:
           dimension:
             type: string
@@ -97,7 +97,7 @@ models:
           dimension:
             type: date
       - name: year_played
-        description: ""
+        description: "{{doc('year_played')}}"
         meta:
           dimension:
             type: string

@@ -2,42 +2,44 @@ models:
   - name: int_pivot_zillow
     columns:
       - name: region_id
-        description: ""
+        description: "{{doc('region_id')}}"
         meta:
           dimension:
             type: number
       - name: size_rank
-        description: ""
+        description: "{{doc('size_rank')}}"
         meta:
           dimension:
             type: number
       - name: region_name
-        description: ""
+        description: "{{doc('region_name')}}"
         meta:
           dimension:
             type: string
       - name: region_type
-        description: ""
+        description: "{{doc('region_type')}}"
         meta:
           dimension:
             type: string
       - name: state_name
-        description: ""
+        description: "{{doc('state_name')}}"
         meta:
           dimension:
             type: string
-      - name: month
-        description: ""
+      - name: year_month
+        description:  "{{doc('year_month')}}"
         meta:
           dimension:
             type: string
-      - name: value
-        description: ""
+      - name: no_homes_for_sale
+        description:  "{{doc('no_homes_for_sale')}}"
         meta:
           dimension:
             type: number
       - name: zillow_pk
-        description: ""
+        description: "Surrogate key generated from region name, year_month entry, and the number of homes for sale."
+        data_tests:
+          - unique
         meta:
           dimension:
             type: string

@@ -1,3 +1,17 @@
+<!-- Table-level documentation -->
+{% docs agg_top_3_albums_by_year %}
+This table calculates how many times I played songs that belong to a particular album, grouped by year. If the total number of track plays from one album is greater than the total from others in that year, that album ranks higher. It does not reflect how many times I listened to an album in full or in order, just the total play count of any tracks from that album.
+{% enddocs %}
+
+{% docs agg_top_3_artists_by_year %}
+This table calculates how many times I played songs that belong to a particular artist, grouped by year. If the total number of track plays from one artist is greater than the total from others in that year, that artist ranks higher. It does not reflect how many times I listened to an artist's full catalog, just the total play count of any tracks from that artist.
+{% enddocs %}
+
+{% docs agg_top_3_songs_by_year %}
+This table calculates how many times I played particular songs grouped by year. 
+{% enddocs %}
+
+<!-- Column-level documentation -->
 {% docs year_played %}
 This field is derived from the "ts" field on Spotify's raw listening history JSON dumps that you can request from [your Spotify account](https://support.spotify.com/us/article/data-rights-and-privacy-settings/). I split it out into years so I can see the evolution of my music taste. 
 

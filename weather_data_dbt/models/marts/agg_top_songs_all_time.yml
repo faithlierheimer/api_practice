@@ -2,22 +2,22 @@ models:
   - name: agg_top_songs_all_time
     columns:
       - name: track_name
-        description: ""
+        description: "{{doc('track_name')}}"
         meta:
           dimension:
             type: string
       - name: artist_name
-        description: ""
+        description: "{{doc('artist_name')}}"
         meta:
           dimension:
             type: string
       - name: album_name
-        description: ""
+        description: "{{doc('album_name')}}"
         meta:
           dimension:
             type: string
       - name: times_played
-        description: ""
+        description: "{{doc('times_played')}}"
         meta:
           dimension:
             type: number
