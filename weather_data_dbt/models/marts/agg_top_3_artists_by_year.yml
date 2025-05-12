@@ -1,5 +1,6 @@
 models:
   - name: agg_top_3_artists_by_year
+    description: '{{ doc("agg_top_3_artists_by_year")}}'
     columns:
       - name: year_played
         description: '{{ doc("year_played") }}'
