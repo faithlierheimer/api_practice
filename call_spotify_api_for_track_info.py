@@ -34,70 +34,51 @@ faith_spotify_tracks_names = faith_spotify_tracks['track_name'].dropna().tolist(
 #grab 10 items to test call
 faith_spotify_tracks_names_first_1 = faith_spotify_tracks_names[:1]
 
-token_info = SpotifyOAuth(
-    client_id=spotify_key.SPOTIFY_CLIENT_ID,
-    client_secret=spotify_key.SPOTIFY_CLIENT_SECRET,
-    redirect_uri="http://127.0.0.1:8888/callback",
-    scope="user-library-read"
-).get_access_token(as_dict=False)
 
+results = []
+track_progress = 1
 
-track_id = '3TgMcrV32NUKjEG2ujn9eh'
-headers = {
-    "Authorization": f"Bearer {token_info}"
-}
-url = f"https://api.spotify.com/v1/audio-features/{track_id}"
+for track_name in faith_spotify_tracks_names_first_1:
+    try:
+        # 1. Search for the track name
+        result = sp.search(q=track_name, type="track", limit=1)
+        print(result)
+        if not result["tracks"]["items"]:
+            print(f"No track found for {track_name}")
+            continue
 
-response = requests.get(url, headers=headers)
-print("Status:", response.status_code)
-print("Response:", response.text)
+        # 2. Extract the track ID
+        track = result["tracks"]["items"][0]
+        track_id = track["id"]
+        print(track_id)
 
-# results = []
-# track_progress = 1
+        if result is None:
+            print(f"No result returned for {track_name} (ID: {track_id})")
+            continue
 
-# for track_name in faith_spotify_tracks_names_first_1:
-#     try:
-#         # 1. Search for the track name
-#         result = sp.search(q=track_name, type="track", limit=1)
-#         if not result["tracks"]["items"]:
-#             print(f"No track found for {track_name}")
-#             continue
+        # 3. Save to results
+        results.append({
+            "input_name": track_name,
+            "spotify_id": track_id,
+            "acousticness": audio_features["acousticness"],
+            "danceability": audio_features["danceability"],
+            "energy": audio_features["energy"],
+            "tempo": audio_features["tempo"],
+            "valence": audio_features["valence"]
+        })
 
-#         # 2. Extract the track ID
-#         track = result["tracks"]["items"][0]
-#         track_id = track["id"]
-#         print(track_id)
-#         # 3. Get audio features for that track ID
-#         audio_features = sp.audio_features([track_id])[0]
-#         print(audio_features)
+        print(f"Appended {track_name} to dataframe. Record {track_progress}")
+        track_progress += 1
+        time.sleep(1)  # to respect rate limits
 
-#         if audio_features is None:
-#             print(f"No audio features returned for {track_name} (ID: {track_id})")
-#             continue
+    except SpotifyException as e:
+        print(f"Spotify API error: {e}")
+        time.sleep(5)
+    except Exception as e:
+        print(f"General error: {e}")
+        time.sleep(5)
 
-#         # 4. Save to results
-#         results.append({
-#             "input_name": track_name,
-#             "spotify_id": track_id,
-#             "acousticness": audio_features["acousticness"],
-#             "danceability": audio_features["danceability"],
-#             "energy": audio_features["energy"],
-#             "tempo": audio_features["tempo"],
-#             "valence": audio_features["valence"]
-#         })
-
-#         print(f"Appended {track_name} to dataframe. Record {track_progress}")
-#         track_progress += 1
-#         time.sleep(1)  # to respect rate limits
-
-#     except SpotifyException as e:
-#         print(f"Spotify API error: {e}")
-#         time.sleep(5)
-#     except Exception as e:
-#         print(f"General error: {e}")
-#         time.sleep(5)
-
-# # Save final results
-# df_results = pd.DataFrame(results)
-# df_results.to_csv("spotify_track_characteristics.csv", index=False)
+# Save final results
+df_results = pd.DataFrame(results)
+df_results.to_csv("spotify_track_characteristics.csv", index=False)
 
