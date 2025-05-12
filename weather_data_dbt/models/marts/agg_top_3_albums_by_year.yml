@@ -22,6 +22,8 @@ models:
           metrics:
             times_album_played:
               type: sum
+          dimension:
+            type: number
       - name: rank
         description: '{{ doc("rank") }}'
         meta:

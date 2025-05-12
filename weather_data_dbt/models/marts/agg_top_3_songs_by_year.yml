@@ -7,7 +7,7 @@ models:
           dimension:
             type: string
       - name: track_name
-        description: ""
+        description: "{{doc('track_name')}}"
         meta:
           dimension:
             type: string
@@ -27,6 +27,8 @@ models:
           metrics:
             times_song_played:
               type: sum
+          dimension:
+            type: number
       - name: rank
         description: '{{ doc("rank") }}'
         meta:

@@ -1,3 +1,9 @@
+<!-- Table-level documentation -->
+{% docs agg_top_3_albums_by_year %}
+
+{% enddocs %}
+
+<!-- Column-level documentation -->
 {% docs year_played %}
 This field is derived from the "ts" field on Spotify's raw listening history JSON dumps that you can request from [your Spotify account](https://support.spotify.com/us/article/data-rights-and-privacy-settings/). I split it out into years so I can see the evolution of my music taste. 
 

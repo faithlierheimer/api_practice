@@ -1,8 +1,8 @@
 models:
-  - name: agg_top_albums_all_time
+  - name: int_tracks_played_10_times
     columns:
-      - name: album_name
-        description: "{{doc('album_name')}}"
+      - name: track_name
+        description:  "{{doc('track_name')}}"
         meta:
           dimension:
             type: string
@@ -11,8 +11,8 @@ models:
         meta:
           dimension:
             type: string
-      - name: times_played
-        description: "{{doc('times_played')}}"
+      - name: track_play_count
+        description: '{{ doc("times_played") }}'
         meta:
           dimension:
             type: number

@@ -17,6 +17,8 @@ models:
           metrics:
             times_artist_played:
               type: sum
+          dimension:
+            type: number
       - name: rank
         description: '{{ doc("rank") }}'
         meta:
