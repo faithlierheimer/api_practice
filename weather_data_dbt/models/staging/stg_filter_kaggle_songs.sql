@@ -4,6 +4,10 @@ with source as (
 
 ),
 
+unioned_spotify_data as (
+    select * from  {{ ref("stg_union_spotify_data_2012_2024") }}
+),
+
 renamed as (
 
     select
@@ -34,6 +38,36 @@ renamed as (
         `release_date` as release_date
     from source
 
+),
+filtered as (
+    select
+        union_data.*,
+
 )
 
-select * from renamed
+add_audio_features as (
+    select
+        add_genres.*,
+        audio_features.is_explicit,
+        audio_features.danceability,
+        audio_features.energy,
+        audio_features.track_key,
+        audio_features.loudness_decibels,
+        audio_features.mode,
+        audio_features.speechiness,
+        audio_features.acousticness,
+        audio_features.instrumentalness,
+        audio_features.liveness,
+        audio_features.valence,
+        audio_features.tempo,
+        audio_features.time_signature,
+        audio_features.year_released,
+        audio_features.release_date
+    from
+        add_genres
+    join
+        audio_features
+    on
+        add_genres.track_name = audio_features.track_name
+
+)
