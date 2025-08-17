@@ -5,7 +5,7 @@ with source as (
 ),
 
 unioned_spotify_data as (
-    select * from  {{ ref("stg_union_spotify_data_2012_2024") }}
+    select track_name from  {{ ref("stg_union_spotify_data_2012_2024") }}
 ),
 
 renamed as (
@@ -39,35 +39,18 @@ renamed as (
     from source
 
 ),
-filtered as (
-    select
-        union_data.*,
 
-)
-
-add_audio_features as (
+filter_kaggle_data as (
     select
-        add_genres.*,
-        audio_features.is_explicit,
-        audio_features.danceability,
-        audio_features.energy,
-        audio_features.track_key,
-        audio_features.loudness_decibels,
-        audio_features.mode,
-        audio_features.speechiness,
-        audio_features.acousticness,
-        audio_features.instrumentalness,
-        audio_features.liveness,
-        audio_features.valence,
-        audio_features.tempo,
-        audio_features.time_signature,
-        audio_features.year_released,
-        audio_features.release_date
+        unioned_spotify_data.track_name as filtered_track_name,
+        renamed.*
     from
-        add_genres
+        unioned_spotify_data
     join
-        audio_features
+        renamed
     on
-        add_genres.track_name = audio_features.track_name
+        unioned_spotify_data.track_name = renamed.track_name
 
 )
+
+select distinct * from filter_kaggle_data

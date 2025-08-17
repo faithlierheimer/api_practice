@@ -15,5 +15,9 @@ sources:
       - name: streaming_history_2020_2022
       - name: streaming_history_2022_2024
       - name: kaggle_track_features
+      - name: faith_song_audio_features
+  - name: fitness
+    tables:
+      - name: peleton
 
 
