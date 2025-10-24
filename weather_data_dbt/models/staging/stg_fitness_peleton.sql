@@ -3,14 +3,14 @@ with source as (
   ),
   renamed as (
       select
-          {{ adapter.quote("Timestamp") }},
+        {{ adapter.quote("Timestamp") }} as class_taken_at,
         {{ adapter.quote("class_type") }},
         {{ adapter.quote("instructor_name") }},
         {{ adapter.quote("length_min") }},
         {{ adapter.quote("fitness_discipline") }},
         {{ adapter.quote("fitness_subtype") }},
         {{ adapter.quote("class_title") }},
-        {{ adapter.quote("class_timestamp") }},
+        {{ adapter.quote("class_timestamp") }} as class_published_at,
         {{ adapter.quote("total_output") }},
         {{ adapter.quote("avg_watts") }},
         {{ adapter.quote("avg_resistance") }},

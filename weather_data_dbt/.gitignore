@@ -2,3 +2,4 @@ faith_bq_key.json
 target/
 dbt_packages/
 logs/
+dbt_internal_packages/
