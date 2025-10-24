@@ -5,6 +5,7 @@ with union_data as (
 genres as (
     select * from {{ ref('stg_genres') }}
 ),
+
 add_genres as (
     select
         union_data.*,
@@ -16,7 +17,7 @@ add_genres as (
         union_data
     left join
         genres
-    on
+    on 
         union_data.artist_name = genres.artist_name)
 
 select * from add_genres

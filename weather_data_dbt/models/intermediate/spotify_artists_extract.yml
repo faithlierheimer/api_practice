@@ -1,8 +1,0 @@
-models:
-  - name: spotify_artists_extract
-    columns:
-      - name: artist_name
-        description: "{{doc('artist_name')}}"
-        meta:
-          dimension:
-            type: string

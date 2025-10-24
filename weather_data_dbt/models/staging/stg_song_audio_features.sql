@@ -1,0 +1,1 @@
+select * from {{ source('spotify', 'faith_song_audio_features')}}

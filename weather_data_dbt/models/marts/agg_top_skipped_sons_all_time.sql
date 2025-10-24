@@ -1,5 +1,5 @@
 with skipped_songs as (
-    select * from {{ref("int_union_spotify_data_2012_2024")}} where skipped is true
+    select * from  {{ ref("stg_union_spotify_data_2012_2024") }} where skipped is true
 )
 
 select 
