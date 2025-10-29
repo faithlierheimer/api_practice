@@ -1,3 +1,6 @@
+{{ config(
+    enabled=false
+)}}
 with track_play_counts_over_10 as (
 select 
     track_name,
