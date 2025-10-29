@@ -3,21 +3,25 @@ models:
     columns:
       - name: track_name
         description: "{{doc('track_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: artist_name
         description: "{{doc('artist_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: album_name
         description: "{{doc('album_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: times_skipped
         description: ""
-        meta:
-          dimension:
-            type: number
+        config:
+          meta:
+            dimension:
+              type: number

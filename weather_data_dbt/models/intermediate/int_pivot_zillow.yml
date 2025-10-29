@@ -3,43 +3,51 @@ models:
     columns:
       - name: region_id
         description: "{{doc('region_id')}}"
-        meta:
-          dimension:
-            type: number
+        config:
+          meta:
+            dimension:
+              type: number
       - name: size_rank
         description: "{{doc('size_rank')}}"
-        meta:
-          dimension:
-            type: number
+        config:
+          meta:
+            dimension:
+              type: number
       - name: region_name
         description: "{{doc('region_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: region_type
         description: "{{doc('region_type')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: state_name
         description: "{{doc('state_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: year_month
-        description:  "{{doc('year_month')}}"
-        meta:
-          dimension:
-            type: string
+        description: "{{doc('year_month')}}"
+        config:
+          meta:
+            dimension:
+              type: string
       - name: no_homes_for_sale
-        description:  "{{doc('no_homes_for_sale')}}"
-        meta:
-          dimension:
-            type: number
+        description: "{{doc('no_homes_for_sale')}}"
+        config:
+          meta:
+            dimension:
+              type: number
       - name: zillow_pk
         description: "Surrogate key generated from region name, year_month entry, and the number of homes for sale."
         data_tests:
           - unique
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string

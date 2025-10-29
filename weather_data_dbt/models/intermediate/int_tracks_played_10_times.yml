@@ -2,17 +2,20 @@ models:
   - name: int_tracks_played_10_times
     columns:
       - name: track_name
-        description:  "{{doc('track_name')}}"
-        meta:
-          dimension:
-            type: string
+        description: "{{doc('track_name')}}"
+        config:
+          meta:
+            dimension:
+              type: string
       - name: artist_name
         description: "{{doc('artist_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: track_play_count
         description: '{{ doc("times_played") }}'
-        meta:
-          dimension:
-            type: number
+        config:
+          meta:
+            dimension:
+              type: number

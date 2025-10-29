@@ -3,16 +3,19 @@ models:
     columns:
       - name: album_name
         description: "{{doc('album_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: artist_name
         description: "{{doc('artist_name')}}"
-        meta:
-          dimension:
-            type: string
+        config:
+          meta:
+            dimension:
+              type: string
       - name: times_played
         description: "{{doc('times_played')}}"
-        meta:
-          dimension:
-            type: number
+        config:
+          meta:
+            dimension:
+              type: number
