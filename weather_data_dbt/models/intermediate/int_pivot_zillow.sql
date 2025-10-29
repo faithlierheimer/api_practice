@@ -1,3 +1,6 @@
+{{config(
+    enabled=false
+)}}
 with source as (
     select * from {{ ref('stg_zillow_locations') }}
 ),
